@@ -11,7 +11,18 @@ Demo app to reproduce ClassCastException on beanFactory race condition
 Spring will fail eventually with:
 
 ```
-java.lang.ClassCastException: class java.lang.Class cannot be cast to class java.lang.String (java.lang.Class and java.lang.String are in module java.base of loader 'bootstrap')
+Exception in thread "Thread-2" java.lang.ClassCastException: class java.lang.Class cannot be cast to class java.lang.String (java.lang.Class and java.lang.String are in module java.base of loader 'bootstrap')
+        at org.springframework.beans.factory.support.AbstractBeanDefinition.getBeanClassName(AbstractBeanDefinition.java:393)
+        at org.springframework.beans.factory.support.AbstractBeanFactory.doResolveBeanClass(AbstractBeanFactory.java:1535)
+        at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1502)
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:492)
+        at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:344)
+        at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:225)
+        at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveNamedBean(DefaultListableBeanFactory.java:1310)
+        at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveNamedBean(DefaultListableBeanFactory.java:1271)
+        at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveBean(DefaultListableBeanFactory.java:484)
+        at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBean(DefaultListableBeanFactory.java:339)
+        at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBean(DefaultListableBeanFactory.java:332)
 ....
 ```
 
